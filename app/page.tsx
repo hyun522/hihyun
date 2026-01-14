@@ -17,40 +17,82 @@ import Image from 'next/image';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const ROTATIONITEMS = [
+  'H',
+  'T',
+  'M',
+  'L',
+  ' ',
+  'C',
+  'S',
+  'S',
+  ' ',
+  'R',
+  'E',
+  'A',
+  'C',
+  'T',
+  ' ',
+  'N',
+  'E',
+  'X',
+  'T',
+  '.',
+  'J',
+  'S',
+  ' ',
+  'T',
+  'Y',
+  'P',
+  'E',
+  'S',
+  'C',
+  'R',
+  'I',
+  'P',
+  'T',
+  ' ',
+  'R',
+  'E',
+  'D',
+  'U',
+  'X',
+  ' ',
+];
+
 export default function Page() {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const [init, setInit] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
 
   useLayoutEffect(() => {
-    if (!rootRef.current) return;
+    if (!init) return;
+    // if (!rootRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.to('.box2', {
-        x: 300,
-        scrollTrigger: {
-          trigger: '.sec2',
-          start: 'top top',
-          end: '+=100%',
-          scrub: true,
-          markers: true,
-        },
-      });
-
-      gsap.to('.box3', {
-        rotation: 360,
-        scrollTrigger: {
-          trigger: '.sec3',
-          start: 'top top',
-          end: '+=100%',
-          scrub: true,
-          markers: true,
-        },
+      // 타이틀 공통 애니메이션
+      // console.log('titles:', gsap.utils.toArray('.reveal-title'));
+      gsap.utils.toArray<HTMLElement>('.reveal-title').forEach((el) => {
+        gsap.fromTo(
+          el,
+          { y: 40, opacity: 0 }, // 초기: 아래 + 투명
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            ease: 'back.out(1.6)', // "툭" 튀어나오는 느낌
+            scrollTrigger: {
+              trigger: el, // 또는 el.closest("section")
+              start: 'top 80%', // 화면 80% 지점에 닿으면 시작
+              toggleActions: 'play none none reverse', // 내려오면 등장, 올라가면 다시 숨김
+              markers: true,
+            },
+          },
+        );
       });
     }, rootRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [init]);
 
   useEffect(() => {
     initParticlesEngine(async (engine: Engine) => {
@@ -63,91 +105,89 @@ export default function Page() {
   const particlesLoaded = useCallback(async (container?: Container) => {
     console.log(container);
   }, []);
-  if (!init) return null;
 
-  const handleClick = () => {
-    setIsOpen(true);
-  };
+  // if (!init) return null; //Particles 엔진이 초기화되기 전에는 <Particles />를 렌더하지 않게 하려고
+  // initParticlesEngine 가 끝나기전에  <Particles />가 렌더되면
+  // 환경에 따라 “엔진이 아직 준비 안 됐는데 렌더됨” 같은 문제(에러/경고/빈 화면/깜빡임)가 날 수 있음.
+  // 그래서 페이지 전체를 null로 막아버리는 선택을 함.
+
+  // if (!init) return null; 때문에 초기 렌더에서 DOM이 존재하지 않았고, 그 결과 useLayoutEffect([])가 실행될 때 rootRef.current가 null이라 GSAP/ScrollTrigger 등록이 스킵된 채로 끝났다.
 
   return (
     <div ref={rootRef}>
       <section className="sec1">
-        <Particles
-          id="tsparticles"
-          particlesLoaded={particlesLoaded}
-          options={{
-            fullScreen: { enable: true, zIndex: -1 },
-            background: {
-              color: {
-                value: '#374151',
+        {init && (
+          <Particles
+            id="tsparticles"
+            particlesLoaded={particlesLoaded}
+            options={{
+              fullScreen: { enable: true, zIndex: -1 },
+              background: {
+                color: {
+                  value: '#374151',
+                },
               },
-            },
-            fpsLimit: 120,
-            detectRetina: true,
+              fpsLimit: 120,
+              detectRetina: true,
 
-            interactivity: {
-              // events: {
-              //   onHover: {
-              //     enable: true,
-              //     mode: '',
-              //   },
-              // },
-              modes: {
-                push: {
-                  quantity: 4,
-                },
-                repulse: {
-                  distance: 200,
-                  duration: 0.4,
+              interactivity: {
+                modes: {
+                  push: {
+                    quantity: 4,
+                  },
+                  repulse: {
+                    distance: 200,
+                    duration: 0.4,
+                  },
                 },
               },
-            },
-            style: {
-              position: 'absolute',
-              height: '100%',
-            },
-            particles: {
-              move: {
-                direction: 'none',
-                enable: true,
-                outModes: {
-                  default: 'bounce',
-                },
-                random: false,
-                speed: 4,
-                straight: false,
+              style: {
+                position: 'absolute',
+                height: '100%',
               },
-              number: {
-                density: {
+              particles: {
+                move: {
+                  direction: 'none',
                   enable: true,
+                  outModes: {
+                    default: 'bounce',
+                  },
+                  random: false,
+                  speed: 4,
+                  straight: false,
                 },
-                value: 60,
-              },
-              shape: {
-                type: 'image',
-                options: {
-                  image: [
-                    { src: '/assets/html.png' },
-                    { src: '/assets/java.svg' },
-                    { src: '/assets/javascript.svg' },
-                    { src: '/assets/react.png' },
-                    { src: '/assets/scss.png' },
-                    { src: '/assets/spring.png' },
-                    { src: '/assets/tailwind.png' },
-                  ],
+                number: {
+                  density: {
+                    enable: true,
+                  },
+                  value: 60,
+                },
+                shape: {
+                  type: 'image',
+                  options: {
+                    image: [
+                      { src: '/assets/html.png' },
+                      { src: '/assets/java.svg' },
+                      { src: '/assets/javascript.svg' },
+                      { src: '/assets/react.png' },
+                      { src: '/assets/scss.png' },
+                      { src: '/assets/spring.png' },
+                      { src: '/assets/tailwind.png' },
+                    ],
+                  },
+                },
+                size: {
+                  value: { min: 3, max: 15 },
                 },
               },
-              size: {
-                value: { min: 3, max: 15 },
-              },
-            },
-            // detectRetina: true,
-          }}
-        />
+              // detectRetina: true,
+            }}
+          />
+        )}
       </section>
 
       <section
-        className="sec2"
+        className="sec1-1"
         style={{
           height: '100vh',
           display: 'flex',
@@ -155,53 +195,315 @@ export default function Page() {
           alignItems: 'center',
         }}
       >
-        <div className="box w-[300px] h-[200px] bg-[#fff] m-auto rounded-[10px] flex justify-center items-center text-[20px] font-medium shadow-[0_35px_35px_rgba(0,0,0,0.25)]">
-          Hello im hyunjin <br />
-          front develop <button onClick={() => handleClick()}>클릭</button>
+        <div className="box box-border w-[650px] h-[300px] bg-[#fff]  m-auto rounded-[10px] flex flex-col justify-center items-center gap-[60px]  font-medium shadow-[0_35px_35px_rgba(0,0,0,0.25)] opacity-[95%]">
+          <p className="text-[50px]">
+            Hello im hyunjin <br />
+            front develop
+          </p>
+          <div className="flex gap-[20px]">
+            <button className="border border-[#ddd] rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd]  transition-all duration-300">
+              Troubleshooting
+            </button>
+            <button className="flex items-center gap-[5px] border border-[#ddd] rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd]  transition-all duration-300">
+              <Image
+                src="/assets/github-log.svg"
+                alt="git 이미지"
+                width={25}
+                height={25}
+              />
+              git
+            </button>
+            <button className="flex items-center  gap-[5px] border border-[#ddd] rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd]  transition-all duration-300">
+              <Image
+                src="/assets/velog-log.png"
+                alt="velog 이미지"
+                width={25}
+                height={25}
+              />
+              velog
+            </button>
+            <button className="flex items-center  gap-[5px] border border-[#ddd]  rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd]  transition-all duration-300">
+              <Image
+                src="/assets/email.png"
+                alt="velog 이미지"
+                width={25}
+                height={25}
+              />
+              mail
+            </button>
+          </div>
         </div>
-        {isOpen && (
-          <div className="w-[560px] h-[400px] bg-pink">
+      </section>
+      <section
+        className="sec2"
+        style={{ height: '100vh', background: '#374151' }}
+      >
+        <div className="relative">
+          {/* <h1 className="title2 text-[60px] font-bold text-[black]">
+            Introduce
+          </h1> */}
+          <h1
+            className="reveal-title relative
+                      text-[60px]
+                      font-bold
+                      text-black
+                      z-10
+                      after:content-['Introduce']
+                      after:absolute
+                      after:text-white
+                      after:top-[4px]
+                      after:left-[3px]
+                      after:bg-[#C84B31]
+                      after:w-[270px]
+                      after:z-[-2]
+                    "
+          >
+            Introduce
+          </h1>
+        </div>
+        <div className="flex  bg-[pink] w-[300px] mx-auto pt-[20px]">
+          <div className="">
             <Image
-              src="/assets/photo.jpg"
+              src="/assets/profile.png"
               alt="증명사진 이미지"
               width={100}
               height={100}
             />
-            <div>
-              <p>정현진</p>
-              <p>이메일 : jhj1004v@naver.com</p>
-              <p>연락처 : 01052619519</p>
+          </div>
+          <div>
+            <p>정현진</p>
+            <p>생년월일 : 1996.11.15</p>
+            <p>주소 : 서울시 구로구 고척로</p>
+          </div>
+        </div>
+        <div className="box-border border border-[5px] border-t-0 border-b-0 border-[pink] rounded-[40px] w-[700px] mx-auto h-[280px] my-[20px]">
+          <div className="border-[20px] border-[#374151] bg-[#374151] w-[600px]  mx-auto text-[white] text-">
+            {/* <span
+              className="bg-[linear-gradient(128.93deg,rgb(0,173,181)_22.41%,rgb(57,62,70)_93.45%)]
+    bg-clip-text
+    text-transparent
+    font-semibold
+  "
+            > */}
+            5. 의료데이터를 다루는 웹서비스를 다루며 비즈니스의 가치를 고객에게
+            온전히 전달하기위해 다양한 직무의 구성원들과{' '}
+            <span className="bg-[linear-gradient(128.93deg,rgb(0,173,181)_22.41%,rgb(57,62,70)_93.45%)]">
+              능동적으로 커뮤니케이션
+            </span>
+            하며, 협업해왔습니다.
+            <br />
+            <br />
+            1. 사용자가 실제로 서비스를 이용하며 겪을 수 있는{' '}
+            <span className="bg-[linear-gradient(128.93deg,rgb(0,173,181)_22.41%,rgb(57,62,70)_93.45%)]">
+              불편함과 예외 상황을 미리 고민하는 자세,
+            </span>
+            로 개발하고 있습니다.
+            <br />
+            <br />
+            3. 공통 코드를 줄이고 유지보수성을 높이기위한
+            <span className="bg-[linear-gradient(128.93deg,rgb(0,173,181)_22.41%,rgb(57,62,70)_93.45%)]">
+              구조적 접근
+            </span>
+            을 선호하며, 코드 품질 향상을 중요하게 생각하고 꾸준히 개선하고자
+            합니다.
+            <br />
+            <br />
+            4. 기록을 중요하게 생각합니다. 문제 발생 시 원인을 추적하고, 개선
+            사항을 다음 개발에 반영하려 노력합니다.
+            <br />
+            <br />
+            6. 기획부터 개발에 참여하는 과정을 좋아합니다. 제가 기획한 것의
+            한계를 인식하고, 그 과정에서 배우며 성장 해 나가고 있습니다.
+            <br />
+            <br />
+            7. 프론트엔드뿐 아니라
+            <span className="bg-[linear-gradient(128.93deg,rgb(0,173,181)_22.41%,rgb(57,62,70)_93.45%)]">
+              개발하는 모든 것을 즐기고자하는 자세
+            </span>
+            로 임하고 있습니다.
+            <br />
+            <br />
+          </div>
+        </div>
+        <div className="relative h-[180px]">
+          <div className="absolute w-[200px] h-[200px] bottom-[90px] right-[160px] flex  items-center animate-[spin_20s_linear_infinite_reverse]">
+            {ROTATIONITEMS.map((item, i) => {
+              const angle = (360 / ROTATIONITEMS.length) * i; //회전에 갯수를 나누고 (아이템하나당 차지하는 각도) * 갯수의 순번(0~)을 곱하고? 360/36 10*
+              return (
+                <div
+                  key={i}
+                  // className="absolute w-full h-full text-white"
+                  className="absolute w-full h-full left-[100px] text-white" //보이지 않는 원을 만들고 각글자를 원둘레에 붙여서 회전시키는 방식
+                  style={{
+                    transform: `
+                      rotate(${angle}deg)
+                    `,
+                    transformOrigin: '0 100px',
+                  }}
+                >
+                  {item}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
-              <p>
-                사용자가 실제로 서비 스를 이용하며 겪을 수 있는 불편함과 예외
-                상황을 미 리 고민하는 개 발자입니다. 단순히 화면을 구현하는 데
-                그치지 않고, 피그마 설계에서 사용자 경험을 검토하며 개선점을
-                제안합니다. 예를 들어, 입력창 유효성 검증을 추가하거나
-                페이지네이션의 클릭 영역·가시성을 개선하여 실제 사용성을
-                높였습니다. 또한 공통 코드를 줄이고 유지보수성을 높이는 구조적
-                접근을 선호합니다 custom hook을 통한 로직 재사 용, variables 및
-                mixin 폴더를 활용한 스타일 일원화 등 코드 품질 향상을 위해
-                꾸준히 개선해왔습니다. 에러 로그를 세밀하게 남기며, 문제 발생
-                원인을 추적·학습하는 과정을 중요하게 생각합니다. 기술적 완성도뿐
-                아니라 사용자 경험과 협업 효율 모두를 개선하는 프론트엔드 개
-                발자로 성장하고 있습니 다.
-              </p>
-              <p>
-                SKIll : HTML, css, javascript, react, Next.js, typescript, sass,
-                tailwind, styledComponents, redux
-              </p>
-              <p>github</p>
-              <p>velog</p>
+      <section
+        className="sec3 "
+        style={{ height: '100vh', background: '#374151' }}
+      >
+        <div className="bg-[#ffff]">
+          <h1
+            className="reveal-title relative
+                    text-[60px]
+                    font-bold
+                  text-[#FF9801]
+                    z-10
+                    after:content-['Career']
+                    after:absolute
+                    after:text-white
+                    after:top-[4px]
+                    after:left-[3px]
+                    after:w-[270px]
+                    after:z-[-2]
+                    "
+          >
+            Career.
+          </h1>
+          <div>
+            <h2>서울대 병원</h2>
+            <p>2024.11.01 ~ 2025.12.31</p>
+            <p>FE 개발</p>
+            <ul>
+              <li>
+                Admin 페이지 개발 React 기반 환경 구축 및 개발(typescript,
+                redux)
+              </li>
+              <li>
+                회원가입 플로우 개선 기존 단일 회원가입 로직을 소셜
+                로그인(OAuth2.0: Google, Physionet, OR C ID) 및 이메일 인증 기반
+                구조로 확장
+              </li>
+            </ul>
+          </div>
+          <h1
+            className="reveal-title relative
+                    text-[60px]
+                    font-bold
+                    text-[#FF9801]
+                    z-10
+                    after:content-['Experience']
+                    after:absolute
+                    after:text-white
+                    after:top-[4px]
+                    after:left-[3px]
+                    after:w-[270px]
+                    after:z-[-2]
+                    "
+          >
+            Experience
+          </h1>
+          <div>
+            <h2>코드잇 프론트엔드 부트캠프 2기 </h2>
+            <p>2023.10 ~ 2024.04</p>
+            <ul>
+              <li>
+                웹 개 발의 기초부터 립트 적용 등의 교 React와 Next.js를 활용한
+                동적 웹 인터 육 이수
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section
+        className="sec4"
+        style={{ height: '100vh', background: '#374151' }}
+      >
+        <h1
+          className="reveal-title relative
+                    text-[60px]
+                    font-bold
+                    text-black
+                    z-10
+                    after:content-['Project']
+                    after:absolute
+                    after:text-white
+                    after:top-[4px]
+                    after:left-[3px]
+                    after:bg-[#C84B31]
+                    after:w-[270px]
+                    after:z-[-2]"
+        >
+          Project
+        </h1>
+        <div className="box-border w-full px-[40px] ">
+          <div className="relative  mx-auto w-[800px] h-[300px] flex justify-between  ">
+            <div className="relative z-10   w-[50%] text-left z-0 ">
+              <h2 className="text-[21px] text-[white]">Chatting</h2>
+              <p className="text-[#8892b0]">2024/08/01 - 2024/08/09 </p>
+              <p className="text-[#8892b0]">1명</p>
+              <div className="p-[25px] bg-[#3d4654] rounded-[8px] text-[#a8b2da] text-[18px] shadow-[0_10px_30px_-15px_rgba(2,12,27,.7)]">
+                PostgreSQL 기반, 인증 데이터베이스 파일 스토리지를 api로
+                제공하는 Supabase를 활용하여 로그인 및 회원가입 / 프로필이미지
+                추가 / 실시간 채팅 기능을 구현했습니다.
+              </div>
+              <p className="text-[#A8B2D1]">react, tailwind, typescrip</p>
+              <div>
+                <Image
+                  src="/assets/github-log.svg"
+                  alt="깃 이미지"
+                  width={20}
+                  height={20}
+                />
+                <Image
+                  src="/assets/external-link.png"
+                  alt="외부링크"
+                  width={20}
+                  height={20}
+                />
+              </div>
+            </div>
+            <div className="absolute  w-[50%] right-[20px] h-full  z-0 ">
+              <video
+                className="w-full h-full"
+                preload="auto"
+                loop
+                autoPlay
+                muted
+                playsInline
+              >
+                <source src="/assets/chatting.mp4" type="video/mp4" />
+              </video>
             </div>
           </div>
-        )}
-      </section>
+        </div>
+        <div>
+          <div>
+            <h2>YUMU 라이브 커머스</h2>
+            <p>2024/02/29 - 2024/4/7</p>
 
-      <section className="sec3" style={{ height: '100vh' }}>
-        <h1>Activity </h1>
-      </section>
-      <section className="sec4" style={{ height: '100vh' }}>
-        <h1>Project </h1>
+            <p>
+              <span>백엔드2</span>
+              <span>프론트2</span>
+              <span>디자인1</span>
+            </p>
+            <p>
+              판매하고자하는 미술작품을 등록하고 판매를 진행할수 있습니다 또
+              원하는 작품을 검색하거나 찜할수있는 라이브 커머스 사이트입니다.
+            </p>
+            <p>
+              typascript, next.js, shadcn-ui, reactHookForm, react-query, axios,
+              tailwind css,
+            </p>
+            <div>
+              <p>git</p>
+              <p>배포링크</p>
+              <p>노션</p>
+            </div>
+          </div>
+          <div>영상</div>
+        </div>
       </section>
     </div>
   );
