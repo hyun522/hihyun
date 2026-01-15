@@ -14,6 +14,7 @@ import Particles, { initParticlesEngine } from '@tsparticles/react';
 import type { Container, Engine } from '@tsparticles/engine';
 import { loadSlim } from '@tsparticles/slim';
 import Image from 'next/image';
+import mailgo from 'mailgo';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -51,6 +52,20 @@ const ROTATIONITEMS = [
   'I',
   'P',
   'T',
+  ' ',
+  'S',
+  'A',
+  'S',
+  'S',
+  ' ',
+  'T',
+  'A',
+  'I',
+  'L',
+  'W',
+  'I',
+  'N',
+  'D',
   ' ',
   'R',
   'E',
@@ -100,6 +115,10 @@ export default function Page() {
     }).then(() => {
       setInit(true);
     });
+  }, []);
+
+  useEffect(() => {
+    mailgo();
   }, []);
 
   const particlesLoaded = useCallback(async (container?: Container) => {
@@ -204,7 +223,12 @@ export default function Page() {
             <button className="border border-[#ddd] rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd]  transition-all duration-300">
               Troubleshooting
             </button>
-            <button className="flex items-center gap-[5px] border border-[#ddd] rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd]  transition-all duration-300">
+            <a
+              href="https://github.com/hyun522"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-[5px] border border-[#ddd] rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd]  transition-all duration-300"
+            >
               <Image
                 src="/assets/github-log.svg"
                 alt="git 이미지"
@@ -212,8 +236,13 @@ export default function Page() {
                 height={25}
               />
               git
-            </button>
-            <button className="flex items-center  gap-[5px] border border-[#ddd] rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd]  transition-all duration-300">
+            </a>
+            <a
+              href="https://velog.io/@jhj1004v/posts"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center  gap-[5px] border border-[#ddd] rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd]  transition-all duration-300"
+            >
               <Image
                 src="/assets/velog-log.png"
                 alt="velog 이미지"
@@ -221,8 +250,13 @@ export default function Page() {
                 height={25}
               />
               velog
-            </button>
-            <button className="flex items-center  gap-[5px] border border-[#ddd]  rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd]  transition-all duration-300">
+            </a>
+            <a
+              href="#mailgo"
+              data-address="jhj1004v"
+              data-domain="naver.com"
+              className="flex items-center  gap-[5px] border border-[#ddd]  rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd]  transition-all duration-300"
+            >
               <Image
                 src="/assets/email.png"
                 alt="velog 이미지"
@@ -230,7 +264,7 @@ export default function Page() {
                 height={25}
               />
               mail
-            </button>
+            </a>
           </div>
         </div>
       </section>
@@ -326,19 +360,19 @@ export default function Page() {
           </div>
         </div>
         <div className="relative h-[180px]">
-          <div className="absolute w-[200px] h-[200px] bottom-[90px] right-[160px] flex  items-center animate-[spin_20s_linear_infinite_reverse]">
+          <div className="absolute w-[300px] h-[300px] bottom-[90px] right-[160px] flex  items-center animate-[spin_20s_linear_infinite_reverse]">
             {ROTATIONITEMS.map((item, i) => {
               const angle = (360 / ROTATIONITEMS.length) * i; //회전에 갯수를 나누고 (아이템하나당 차지하는 각도) * 갯수의 순번(0~)을 곱하고? 360/36 10*
               return (
                 <div
                   key={i}
                   // className="absolute w-full h-full text-white"
-                  className="absolute w-full h-full left-[100px] text-white" //보이지 않는 원을 만들고 각글자를 원둘레에 붙여서 회전시키는 방식
+                  className="absolute w-full h-full left-[150px] text-white" //보이지 않는 원을 만들고 각글자를 원둘레에 붙여서 회전시키는 방식
                   style={{
                     transform: `
                       rotate(${angle}deg)
                     `,
-                    transformOrigin: '0 100px',
+                    transformOrigin: '0 150px',
                   }}
                 >
                   {item}
@@ -450,12 +484,18 @@ export default function Page() {
               </div>
               <p className="text-[#A8B2D1]">react, tailwind, typescrip</p>
               <div>
-                <Image
-                  src="/assets/github-log.svg"
-                  alt="깃 이미지"
-                  width={20}
-                  height={20}
-                />
+                <a
+                  href="https://github.com/hyun522/chatting"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image
+                    src="/assets/github-log.svg"
+                    alt="깃 이미지"
+                    width={20}
+                    height={20}
+                  />
+                </a>
                 <Image
                   src="/assets/external-link.png"
                   alt="외부링크"
@@ -497,8 +537,30 @@ export default function Page() {
               tailwind css,
             </p>
             <div>
-              <p>git</p>
-              <p>배포링크</p>
+              <a
+                href="https://github.com/Team-YUMU/YUMU-FE?tab=readme-ov-file"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src="/assets/github-log.svg"
+                  alt="깃 이미지"
+                  width={20}
+                  height={20}
+                />
+              </a>
+              <a
+                href="https://yu-mu.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src="/assets/external-link.png"
+                  alt="외부링크"
+                  width={20}
+                  height={20}
+                />
+              </a>
               <p>노션</p>
             </div>
           </div>
