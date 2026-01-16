@@ -240,9 +240,14 @@ export default function Page() {
             front develop
           </p>
           <div className="flex gap-[20px]">
-            <button className="border border-[#ddd] rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd]  transition-all duration-300">
+            <a
+              href="https://glory-cornflower-db3.notion.site/Admin-23879e87723780bda172c9498f68f920?source=copy_link"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border border-[#ddd] rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd]  transition-all duration-300"
+            >
               Troubleshooting
-            </button>
+            </a>
             <a
               href="https://github.com/hyun522"
               target="_blank"
@@ -583,12 +588,15 @@ export default function Page() {
           <div>영상</div>
         </div>
       </section>
-      <button
-        className={`w-[50px] h-[50px] bg-[pink] rounded-[50%] text-[whiite] justify-center items-center fixed bottom-[20px] right-[20px] ${showScrollBtn ? 'flex' : 'hidden'}`}
-        onClick={() => handleScrollToTop()}
-      >
-        <FaArrowUp color="white" />
-      </button>
+      {/* 시멘틱 태그 여기도 section 넣는게 맞아? */}
+      <section>
+        <button
+          className={`w-[50px] h-[50px] bg-[pink] rounded-[50%] text-[whiite] justify-center items-center fixed bottom-[20px] right-[20px] ${showScrollBtn ? 'flex' : 'hidden'}`}
+          onClick={() => handleScrollToTop()}
+        >
+          <FaArrowUp color="white" />
+        </button>
+      </section>
     </div>
   );
 }
