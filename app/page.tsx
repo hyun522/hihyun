@@ -15,6 +15,7 @@ import type { Container, Engine } from '@tsparticles/engine';
 import { loadSlim } from '@tsparticles/slim';
 import Image from 'next/image';
 import mailgo from 'mailgo';
+import { FaArrowUp } from 'react-icons/fa';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -78,6 +79,7 @@ const ROTATIONITEMS = [
 export default function Page() {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const [init, setInit] = useState(false);
+  const [showScrollBtn, setShowScrollBtn] = useState<boolean>(false);
 
   useLayoutEffect(() => {
     if (!init) return;
@@ -108,6 +110,24 @@ export default function Page() {
 
     return () => ctx.revert();
   }, [init]);
+
+  useEffect(() => {
+    //scroll 이벤트가 발생되면  handleScroll 함수를 실행시키겠다.
+    const handleScroll = () => {
+      if (window.scrollY > 200) {
+        setShowScrollBtn(true);
+      } else {
+        setShowScrollBtn(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   useEffect(() => {
     initParticlesEngine(async (engine: Engine) => {
@@ -273,9 +293,6 @@ export default function Page() {
         style={{ height: '100vh', background: '#374151' }}
       >
         <div className="relative">
-          {/* <h1 className="title2 text-[60px] font-bold text-[black]">
-            Introduce
-          </h1> */}
           <h1
             className="reveal-title relative
                       text-[60px]
@@ -366,7 +383,6 @@ export default function Page() {
               return (
                 <div
                   key={i}
-                  // className="absolute w-full h-full text-white"
                   className="absolute w-full h-full left-[150px] text-white" //보이지 않는 원을 만들고 각글자를 원둘레에 붙여서 회전시키는 방식
                   style={{
                     transform: `
@@ -567,6 +583,12 @@ export default function Page() {
           <div>영상</div>
         </div>
       </section>
+      <button
+        className={`w-[50px] h-[50px] bg-[pink] rounded-[50%] text-[whiite] justify-center items-center fixed bottom-[20px] right-[20px] ${showScrollBtn ? 'flex' : 'hidden'}`}
+        onClick={() => handleScrollToTop()}
+      >
+        <FaArrowUp color="white" />
+      </button>
     </div>
   );
 }
