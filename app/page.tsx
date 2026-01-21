@@ -105,7 +105,7 @@ export default function Page() {
               trigger: el, // 또는 el.closest("section")
               start: 'top 70%', // 화면 80% 지점에 닿으면 시작
               toggleActions: 'play none none reverse', // 내려오면 등장, 올라가면 다시 숨김
-              markers: true,
+              markers: false,
             },
           },
         );
