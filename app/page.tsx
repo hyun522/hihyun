@@ -372,7 +372,7 @@ export default function Page() {
             <br />
             <br />
             사용자가 실제로 서비스를 이용하며 겪을 수 있는 <span className="bg-[linear-gradient(128.93deg,rgb(0,173,181)_22.41%,rgb(57,62,70)_93.45%)]">
-              불편함과 예외 상황을 미리 고민하는 자세,
+              불편함과 예외 상황을 미리 고민하는 자세
             </span>
             로 개발하고 있습니다.
             <br />
