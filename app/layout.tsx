@@ -1,17 +1,22 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import {  Roboto_Slab, Nanum_Gothic  } from 'next/font/google';
 import '@/app/global.css';
+import Script from 'next/script';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+
+const RobotoSlab = Roboto_Slab({
   subsets: ['latin'],
+  weight: ['100', '300', '400', '500', '700', '900'],
+  display: 'swap',
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const NanumGothic = Nanum_Gothic({
   subsets: ['latin'],
+  weight: [ '400', '700', '800'],
+  display: 'swap',
 });
 
+// Roboto Slab
 export const metadata: Metadata = {
   title: 'Frontend Portfolio | Hyunjin Jeong',
   description:
@@ -26,16 +31,26 @@ export const metadata: Metadata = {
   ],
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const key = process.env.NEXT_PUBLIC_KAKAO_KEY;
+
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+        // className={`antialiased`}
+        className={`${RobotoSlab.className} ${NanumGothic.className} antialiased`}
+      > 
+         <Script
+          src={`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${key}&libraries=services,clusterer&autoload=false`}
+          strategy="afterInteractive"
+          // onLoad={() => console.log('[Kakao] script loaded')}
+          // onError={(e) => console.log('[Kakao] script error', e)}
+        />
         {children}
       </body>
     </html>

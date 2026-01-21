@@ -16,6 +16,8 @@ import { loadSlim } from '@tsparticles/slim';
 import Image from 'next/image';
 import mailgo from 'mailgo';
 import { FaArrowUp } from 'react-icons/fa';
+import { Map, MapMarker } from "react-kakao-maps-sdk"
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -80,6 +82,7 @@ export default function Page() {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const [init, setInit] = useState(false);
   const [showScrollBtn, setShowScrollBtn] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useLayoutEffect(() => {
     if (!init) return;
@@ -151,6 +154,12 @@ export default function Page() {
   // 그래서 페이지 전체를 null로 막아버리는 선택을 함.
 
   // if (!init) return null; 때문에 초기 렌더에서 DOM이 존재하지 않았고, 그 결과 useLayoutEffect([])가 실행될 때 rootRef.current가 null이라 GSAP/ScrollTrigger 등록이 스킵된 채로 끝났다.
+
+  useEffect(() => {
+    console.log('[Page] mount');
+    return () => console.log('[Page] unmount');
+  }, []);
+
 
   return (
     <div ref={rootRef}>
@@ -224,7 +233,6 @@ export default function Page() {
           />
         )}
       </section>
-
       <section
         className="sec1-1"
         style={{
@@ -234,20 +242,18 @@ export default function Page() {
           alignItems: 'center',
         }}
       >
-        <div className="box box-border w-[650px] h-[300px] bg-[#fff]  m-auto rounded-[10px] flex flex-col justify-center items-center gap-[60px]  font-medium shadow-[0_35px_35px_rgba(0,0,0,0.25)] opacity-[95%]">
-          <p className="text-[50px]">
-            Hello im hyunjin <br />
+        <div className="box box-border w-[650px] bg-[#fff] p-[20px] m-auto rounded-[10px] flex flex-col justify-center items-center gap-[30px]  font-medium shadow-[0_35px_35px_rgba(0,0,0,0.25)] opacity-[95%]">
+          <p className="font-[roboto_slab]  text-[60px] font-[roboto_slab] text-center">
+            Hello I'm hyunjin <br />
             front develop
           </p>
-          <div className="flex gap-[20px]">
-            <a
-              href="https://glory-cornflower-db3.notion.site/Admin-23879e87723780bda172c9498f68f920?source=copy_link"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border border-[#ddd] rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd]  transition-all duration-300"
+          <div className="flex gap-[20px] font-[roboto_slab] font-medium">
+            <button
+              onClick={() => setIsOpen(true)}
+              className="border border-[#ddd] rounded-[6px] px-[15px] py-[8px]  shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd]  transition-all duration-300"
             >
               Troubleshooting
-            </a>
+            </button>
             <a
               href="https://github.com/hyun522"
               target="_blank"
@@ -266,7 +272,7 @@ export default function Page() {
               href="https://velog.io/@jhj1004v/posts"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center  gap-[5px] border border-[#ddd] rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd]  transition-all duration-300"
+              className="flex items-center gap-[5px] border border-[#ddd] rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd]  transition-all duration-300"
             >
               <Image
                 src="/assets/velog-log.png"
@@ -280,7 +286,7 @@ export default function Page() {
               href="#mailgo"
               data-address="jhj1004v"
               data-domain="naver.com"
-              className="flex items-center  gap-[5px] border border-[#ddd]  rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd]  transition-all duration-300"
+              className="flex items-center gap-[5px] border border-[#ddd]  rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd]  transition-all duration-300"
             >
               <Image
                 src="/assets/email.png"
@@ -300,39 +306,61 @@ export default function Page() {
         <div className="relative">
           <h1
             className="reveal-title relative
-                      text-[60px]
+                      text-[70px]
                       font-bold
                       text-black
                       z-10
+                      p-[15px]
+                      font-[nanum_gothic]
                       after:content-['Introduce']
                       after:absolute
                       after:text-white
-                      after:top-[4px]
+                      after:top-[3px]
                       after:left-[3px]
-                      after:bg-[#C84B31]
-                      after:w-[270px]
+                      after:bg-[#c84b31]
+                      after:p-[15px]
                       after:z-[-2]
                     "
           >
             Introduce
           </h1>
         </div>
-        <div className="flex  bg-[pink] w-[300px] mx-auto pt-[20px]">
+        <div className="flex justify-center items-center text-white w-[450px] mx-auto mt-[50px] p-[20px] gap-[50px] font-[nanum_gothic] font-semibold" >
           <div className="">
             <Image
               src="/assets/profile.png"
               alt="증명사진 이미지"
-              width={100}
-              height={100}
+              width={120}
+              height={120}
+              
             />
           </div>
-          <div>
-            <p>정현진</p>
+          <div className='flex flex-col '>
+            <p className='text-[40px] mb-[10px]'>정현진</p>
             <p>생년월일 : 1996.11.15</p>
-            <p>주소 : 서울시 구로구 고척로</p>
+            {/* <Map
+            center={{ lat: 33.5563, lng: 126.79581 }}
+            style={{ width: "100%", height: "360px" }}
+            >
+            <MapMarker position={{ lat: 33.55635, lng: 126.795841 }}>
+            <div style={{ color: "#000" }}>Hello World!</div>
+            </MapMarker>
+            </Map> */}
+            <div className='flex gap-[2px] h-[30px] items-end '>
+              주소 : 서울시 구로구 고척로
+               <span className='cursor-pointer'
+               >
+                <Image src="/assets/location.png"
+                  alt="위치 아이콘"
+                  width={30}
+                  height={30}
+                  className=''
+                />
+              </span>
+            </div>
           </div>
         </div>
-        <div className="box-border border border-[5px] border-t-0 border-b-0 border-[pink] rounded-[40px] w-[700px] mx-auto h-[280px] my-[20px]">
+        <div className="box-border border border-[5px] border-t-0 border-b-0 border-[black] rounded-[40px] w-[700px] mx-auto my-[20px]">
           <div className="border-[20px] border-[#374151] bg-[#374151] w-[600px]  mx-auto text-[white] text-">
             {/* <span
               className="bg-[linear-gradient(128.93deg,rgb(0,173,181)_22.41%,rgb(57,62,70)_93.45%)]
@@ -341,39 +369,34 @@ export default function Page() {
     font-semibold
   "
             > */}
-            5. 의료데이터를 다루는 웹서비스를 다루며 비즈니스의 가치를 고객에게
-            온전히 전달하기위해 다양한 직무의 구성원들과{' '}
-            <span className="bg-[linear-gradient(128.93deg,rgb(0,173,181)_22.41%,rgb(57,62,70)_93.45%)]">
-              능동적으로 커뮤니케이션
+            의료데이터를 다루는 웹서비스를 다루며 비즈니스의 가치를 고객에게
+            온전히 전달하기위해 다양한 직무의 구성원들과 <span className="bg-[linear-gradient(128.93deg,rgb(0,173,181)_22.41%,rgb(57,62,70)_93.45%)]">능동적으로 커뮤니케이션
             </span>
             하며, 협업해왔습니다.
             <br />
             <br />
-            1. 사용자가 실제로 서비스를 이용하며 겪을 수 있는{' '}
-            <span className="bg-[linear-gradient(128.93deg,rgb(0,173,181)_22.41%,rgb(57,62,70)_93.45%)]">
+            사용자가 실제로 서비스를 이용하며 겪을 수 있는 <span className="bg-[linear-gradient(128.93deg,rgb(0,173,181)_22.41%,rgb(57,62,70)_93.45%)]">
               불편함과 예외 상황을 미리 고민하는 자세,
             </span>
             로 개발하고 있습니다.
             <br />
             <br />
-            3. 공통 코드를 줄이고 유지보수성을 높이기위한
-            <span className="bg-[linear-gradient(128.93deg,rgb(0,173,181)_22.41%,rgb(57,62,70)_93.45%)]">
+            공통 코드를 줄이고 유지보수성을 높이기위한 <span className="bg-[linear-gradient(128.93deg,rgb(0,173,181)_22.41%,rgb(57,62,70)_93.45%)]">
               구조적 접근
             </span>
             을 선호하며, 코드 품질 향상을 중요하게 생각하고 꾸준히 개선하고자
             합니다.
             <br />
             <br />
-            4. 기록을 중요하게 생각합니다. 문제 발생 시 원인을 추적하고, 개선
+            기록을 중요하게 생각합니다. 문제 발생 시 원인을 추적하고, 개선
             사항을 다음 개발에 반영하려 노력합니다.
             <br />
             <br />
-            6. 기획부터 개발에 참여하는 과정을 좋아합니다. 제가 기획한 것의
+            기획부터 개발에 참여하는 과정을 좋아합니다. 제가 기획한 것의
             한계를 인식하고, 그 과정에서 배우며 성장 해 나가고 있습니다.
             <br />
             <br />
-            7. 프론트엔드뿐 아니라
-            <span className="bg-[linear-gradient(128.93deg,rgb(0,173,181)_22.41%,rgb(57,62,70)_93.45%)]">
+            프론트엔드뿐 아니라 <span className="bg-[linear-gradient(128.93deg,rgb(0,173,181)_22.41%,rgb(57,62,70)_93.45%)]">
               개발하는 모든 것을 즐기고자하는 자세
             </span>
             로 임하고 있습니다.
@@ -382,7 +405,7 @@ export default function Page() {
           </div>
         </div>
         <div className="relative h-[180px]">
-          <div className="absolute w-[300px] h-[300px] bottom-[90px] right-[160px] flex  items-center animate-[spin_20s_linear_infinite_reverse]">
+          <div className="absolute w-[300px] h-[300px] bottom-[90px] right-[18%] flex  items-center animate-[spin_20s_linear_infinite_reverse]">
             {ROTATIONITEMS.map((item, i) => {
               const angle = (360 / ROTATIONITEMS.length) * i; //회전에 갯수를 나누고 (아이템하나당 차지하는 각도) * 갯수의 순번(0~)을 곱하고? 360/36 10*
               return (
@@ -403,21 +426,24 @@ export default function Page() {
           </div>
         </div>
       </section>
-
       <section
         className="sec3 "
-        style={{ height: '100vh', background: '#374151' }}
+        style={{ height: '100vh', background: '#374151', display:'flex', alignItems:'center'}}
       >
-        <div className="bg-[#ffff]">
+        <div className=" flex flex-col  items-center w-full font-[nanum_gothic] ">
+          <div className='w-[1100px] flex flex-col '>
+
+          <div className='reveal-title  p-[40px]  bg-white'>
           <h1
-            className="reveal-title relative
+            className="
+             relative
                     text-[60px]
                     font-bold
                   text-[#FF9801]
                     z-10
                     after:content-['Career']
                     after:absolute
-                    after:text-white
+                    after:text-black
                     after:top-[4px]
                     after:left-[3px]
                     after:w-[270px]
@@ -427,10 +453,10 @@ export default function Page() {
             Career.
           </h1>
           <div>
-            <h2>서울대 병원</h2>
-            <p>2024.11.01 ~ 2025.12.31</p>
-            <p>FE 개발</p>
-            <ul>
+            <h2 className='font-[nanum_gothic] text-[30px] font-bold'>서울대 병원</h2>
+            <p className='mb-[10px] font-bold text-[#aaa]'>2024.11.01 ~ 2025.12.31</p>
+            <p className='inline font-bold p-[8px] rounded-[14px] bg-orange-300'>FE 개발</p>
+            <ul className='mt-[10px]'>
               <li>
                 Admin 페이지 개발 React 기반 환경 구축 및 개발(typescript,
                 redux)
@@ -442,15 +468,17 @@ export default function Page() {
               </li>
             </ul>
           </div>
+          </div>
+          <div className='reveal-title  p-[40px] mt-[90px] flex flex-col  items-end text-end  bg-amber-100' >
           <h1
-            className="reveal-title relative
+            className="relative
                     text-[60px]
                     font-bold
                     text-[#FF9801]
                     z-10
                     after:content-['Experience']
                     after:absolute
-                    after:text-white
+                    after:text-black
                     after:top-[4px]
                     after:left-[3px]
                     after:w-[270px]
@@ -459,36 +487,43 @@ export default function Page() {
           >
             Experience
           </h1>
-          <div>
-            <h2>코드잇 프론트엔드 부트캠프 2기 </h2>
-            <p>2023.10 ~ 2024.04</p>
+          <div >
+            <h2 className='font-[nanum_gothic] text-[30px] font-bold'>코드잇 프론트엔드 부트캠프 2기 </h2>
+            <p className='mb-[10px] font-bold text-[#aaa]'>2023.10 ~ 2024.04</p>
             <ul>
               <li>
                 웹 개 발의 기초부터 립트 적용 등의 교 React와 Next.js를 활용한
-                동적 웹 인터 육 이수
+                동적 웹 인터 교육 이수
               </li>
             </ul>
           </div>
+          </div>
+        </div>
         </div>
       </section>
       <section
         className="sec4"
+        // style={{ height: '100vh', background: '#374151' }}
         style={{ height: '100vh', background: '#374151' }}
       >
         <h1
           className="reveal-title relative
-                    text-[60px]
-                    font-bold
-                    text-black
-                    z-10
-                    after:content-['Project']
-                    after:absolute
-                    after:text-white
-                    after:top-[4px]
-                    after:left-[3px]
-                    after:bg-[#C84B31]
-                    after:w-[270px]
-                    after:z-[-2]"
+                      text-[70px]
+                      font-bold
+                      text-black
+                      z-10
+                      p-[15px]
+                      font-[nanum_gothic]
+                      after:content-['Project']
+                      after:absolute
+                      after:text-white
+                      after:top-[3px]
+                      after:left-[3px]
+                      after:bg-[#60A5FA]
+                      after:p-[15px]
+                      after:w-[270px]
+                      after:z-[-2]
+                    "
         >
           Project
         </h1>
@@ -539,38 +574,46 @@ export default function Page() {
             </div>
           </div>
         </div>
-        <div>
-          <div>
-            <h2>YUMU 라이브 커머스</h2>
-            <p>2024/02/29 - 2024/4/7</p>
-
-            <p>
-              <span>백엔드2</span>
-              <span>프론트2</span>
-              <span>디자인1</span>
-            </p>
-            <p>
-              판매하고자하는 미술작품을 등록하고 판매를 진행할수 있습니다 또
-              원하는 작품을 검색하거나 찜할수있는 라이브 커머스 사이트입니다.
-            </p>
-            <p>
-              typascript, next.js, shadcn-ui, reactHookForm, react-query, axios,
-              tailwind css,
-            </p>
+        
+<div className="box-border w-full px-[40px] ">
+          <div className="relative  mx-auto w-[800px] h-[300px] flex justify-between  bg-[red] ">
+            {/* <div className="absolute  w-[50%] h-full  z-0 bg-[yellow] "> */}
             <div>
-              <a
-                href="https://github.com/Team-YUMU/YUMU-FE?tab=readme-ov-file"
-                target="_blank"
-                rel="noopener noreferrer"
+              <video
+                className="w-full h-full"
+                preload="auto"
+                loop
+                autoPlay
+                muted
+                playsInline
               >
-                <Image
-                  src="/assets/github-log.svg"
-                  alt="깃 이미지"
-                  width={20}
-                  height={20}
-                />
-              </a>
-              <a
+                <source src="/assets/chatting.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div className="relative z-10   w-[50%] text-left   bg-[blue]">
+              <h2 className="text-[21px] text-[white]">YUMU 커머스</h2>
+              <p className="text-[#8892b0]">2024/02/29 - 2024/4/7 </p>
+              <p className="text-[#8892b0]">백엔드2 프론트2 디자인1</p>
+              <div className="p-[25px] bg-[#3d4654] rounded-[8px] text-[#a8b2da] text-[18px] shadow-[0_10px_30px_-15px_rgba(2,12,27,.7)]">
+              판매하고자하는 미술작품을 등록하고 판매를 진행할수 있습니다 또
+              원하는 작품을 검색하거나 찜할수있는 커머스 사이트입니다.
+              </div>
+              <p className="text-[#A8B2D1]"> typascript, next.js, shadcn-ui, reactHookForm, react-query, axios,
+              tailwind css</p>
+              <div>
+                <a
+                href="https://github.com/Team-YUMU/YUMU-FE?tab=readme-ov-file"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image
+                    src="/assets/github-log.svg"
+                    alt="깃 이미지"
+                    width={20}
+                    height={20}
+                  />
+                </a>
+                <a
                 href="https://yu-mu.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -582,10 +625,61 @@ export default function Page() {
                   height={20}
                 />
               </a>
-              <p>노션</p>
+              </div>
             </div>
           </div>
-          <div>영상</div>
+        </div>
+<div className="box-border w-full px-[40px] ">
+          <div className="relative  mx-auto w-[800px] h-[300px] flex justify-between  ">
+            <div className="relative z-10   w-[50%] text-left z-0 ">
+              <h2 className="text-[21px] text-[white]">tripterior 가족여행기록 사이트</h2>
+              <p className="text-[#8892b0]">2024/09/09 - 2024/10/19</p>
+              <p className="text-[#8892b0]">백엔드2 프론트2(팀장담당) 디자인1 기획자1</p>
+              <div className="p-[25px] bg-[#3d4654] rounded-[8px] text-[#a8b2da] text-[18px] shadow-[0_10px_30px_-15px_rgba(2,12,27,.7)]">
+              가족 프로필을 생성, 가족 여행 기록을 남기기 댓글을 통해 소통할 수 있습니다. 또한, 기념일을 설정하고 이를 저장하여 알림을 받을 수 있는 사이트.
+              </div>
+              <p className="text-[#A8B2D1]">Next.js, typascript, reducx, react-query,  scss</p>
+              <div>
+                <a
+                href="https://github.com/SWYP-6-6/tripterrior"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image
+                    src="/assets/github-log.svg"
+                    alt="깃 이미지"
+                    width={20}
+                    height={20}
+                  />
+                </a>
+                <a
+                href="https://yu-mu.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src="/assets/external-link.png"
+                  alt="외부링크"
+                  width={20}
+                  height={20}
+                />
+              </a>
+              미제공
+              </div>
+            </div>
+            <div className="absolute  w-[50%] right-[20px] h-full  z-0 ">
+              <video
+                className="w-full h-full"
+                preload="auto"
+                loop
+                autoPlay
+                muted
+                playsInline
+              >
+                <source src="/assets/chatting.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
         </div>
       </section>
       {/* 시멘틱 태그 여기도 section 넣는게 맞아? */}
@@ -597,6 +691,26 @@ export default function Page() {
           <FaArrowUp color="white" />
         </button>
       </section>
+      {isOpen && (
+        <div
+          className="fixed left-0 top-0 z-20 flex h-screen w-screen items-center justify-center bg-[rgba(17,17,17,0.482)]"
+          onClick={() => setIsOpen(false)}
+        >
+          <div
+            className="h-[80%] w-[80%] bg-white max-md:w-[90%] opacity-100 translate-y-0 scale-100"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <iframe
+              src="https://low-baboon.super.site/"
+              className="h-full w-full"
+              loading="lazy"
+              referrerPolicy="no-referrer"
+            ></iframe>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
+
+
