@@ -84,6 +84,7 @@ export default function Page() {
   const [init, setInit] = useState(false);
   const [showScrollBtn, setShowScrollBtn] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isMapOpen, setIsMapOpen] = useState<boolean>(false);
 
   useLayoutEffect(() => {
     if (!init) return;
@@ -325,7 +326,7 @@ export default function Page() {
             Introduce
           </h1>
         </div>
-        <div className="flex justify-center items-center text-white w-[450px] mx-auto mt-[50px] p-[20px] gap-[50px] font-[nanum_gothic] font-semibold" >
+        <div className="flex justify-center items-center text-white w-[500px] mx-auto mt-[50px] p-[20px] gap-[50px] font-[nanum_gothic] font-semibold" >
           <div className="">
             <Image
               src="/assets/profile.png"
@@ -335,28 +336,30 @@ export default function Page() {
               
             />
           </div>
-          <div className='flex flex-col '>
+          <div className='flex flex-col w-full'>
             <p className='text-[40px] mb-[10px]'>정현진</p>
             <p>생년월일 : 1996.11.15</p>
-            {/* <Map
-            center={{ lat: 33.5563, lng: 126.79581 }}
-            style={{ width: "100%", height: "360px" }}
-            >
-            <MapMarker position={{ lat: 33.55635, lng: 126.795841 }}>
-            <div style={{ color: "#000" }}>Hello World!</div>
-            </MapMarker>
-            </Map> */}
-            <div className='flex gap-[2px] h-[30px] items-end '>
+            <div className='flex gap-[20px] h-[30px] items-end w-full '>
               주소 : 서울시 구로구 고척로
-               <span className='cursor-pointer animate-[wiggleLR_1.2s_ease-in-out_infinite]'
-               >
-                <Image src="/assets/location.png"
-                  alt="위치 아이콘"
-                  width={30}
-                  height={30}
-                  className=''
-                />
-              </span>
+              <div className='relative w-[60px]' onClick={()=>setIsMapOpen(true)} >
+                <span className='absolute bottom-[0px] z-10 left-[-10px] cursor-pointer animate-[wiggleLR_1.2s_ease-in-out_infinite]'>
+                  <Image src="/assets/location.png"
+                    alt="위치 아이콘"
+                    width={30}
+                    height={30}
+                   
+                  />
+                </span>
+                <Map
+                  center={{ lat: 37.501581, lng: 126.846524 }}
+                  style={{ width: "100%", height: "60px", borderRadius:'50%' }}
+                  >
+                  {/* <MapMarker position={{ lat: 33.55635, lng: 126.795841 }}>
+                    <div style={{ color: "#000" }}>My House</div>
+                  </MapMarker> */}
+                </Map>
+           
+              </div>
             </div>
           </div>
         </div>
@@ -687,6 +690,26 @@ export default function Page() {
             ></iframe>
           </div>
         </div>
+      )}
+      {isMapOpen &&(
+        <div
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+        onClick={() => setIsMapOpen(false)}
+      >
+        <div
+          className="w-[90%] max-w-[800px] h-[70vh] bg-white rounded-2xl overflow-hidden"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <Map
+            center={{ lat: 37.501581, lng: 126.846524 }}
+            style={{ width: "100%", height: "100%" }}
+            level={3}
+          >
+            <MapMarker position={{ lat: 37.501581, lng: 126.846524 }} />
+          </Map>
+        </div>
+      </div>
+    
       )}
     </div>
   );

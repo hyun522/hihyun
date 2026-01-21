@@ -3,6 +3,7 @@ import {  Roboto_Slab, Nanum_Gothic  } from 'next/font/google';
 import '@/app/global.css';
 import Script from 'next/script';
 import { Toaster } from 'sonner';
+// import { useState } from 'react';
 
 
 const RobotoSlab = Roboto_Slab({
@@ -16,6 +17,8 @@ const NanumGothic = Nanum_Gothic({
   weight: [ '400', '700', '800'],
   display: 'swap',
 });
+
+// const [isKakaoLoaded, setIsKakaoLoaded] = useState(false);
 
 // Roboto Slab
 export const metadata: Metadata = {
@@ -48,13 +51,18 @@ export default function RootLayout({
       > 
          <Script
           src={`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${key}&libraries=services,clusterer&autoload=false`}
-          strategy="afterInteractive"
-          // onLoad={() => console.log('[Kakao] script loaded')}
-          // onError={(e) => console.log('[Kakao] script error', e)}
+          strategy="beforeInteractive"
+          // onLoad={() => {
+          //   window.kakao.maps.load(() => {
+          //     setIsKakaoLoaded(true);
+          //   });
+          // }}
         />
+        
         <main>{children}</main>
         <Toaster />
       </body>
     </html>
   );
 }
+
