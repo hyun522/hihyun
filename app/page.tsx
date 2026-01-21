@@ -17,6 +17,7 @@ import Image from 'next/image';
 import mailgo from 'mailgo';
 import { FaArrowUp } from 'react-icons/fa';
 import { Map, MapMarker } from "react-kakao-maps-sdk"
+import { toast } from 'sonner';
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -347,7 +348,7 @@ export default function Page() {
             </Map> */}
             <div className='flex gap-[2px] h-[30px] items-end '>
               주소 : 서울시 구로구 고척로
-               <span className='cursor-pointer'
+               <span className='cursor-pointer animate-[wiggleLR_1.2s_ease-in-out_infinite]'
                >
                 <Image src="/assets/location.png"
                   alt="위치 아이콘"
@@ -542,12 +543,14 @@ export default function Page() {
                       height={25}
                     />
                   </a>
+                  <button    onClick={()=>toast.warning('현재 미제공 중입니다.',{ position: "top-right" })}>
                   <Image
                     src="/assets/external-link.png"
                     alt="외부링크"
                     width={25}
                     height={25}
                   />
+                  </button>
                 </div>
               </div>
               <div className="absolute w-[60%] he right-[0px] z-0 h-full ">
@@ -564,17 +567,13 @@ export default function Page() {
               </div>
             </div>
                 <div className='reveal-title relative  w-full h-[400px]  flex justify-between items-center '>
-                  <div  className='relative  w-[60%]  z-0'>
-                    <video
-                      className="w-full h-full"
-                      preload="auto"
-                      loop
-                      autoPlay
-                      muted
-                      playsInline
-                    >
-                      <source src="/assets/chatting.mp4" type="video/mp4" />
-                    </video>
+                  <div  className='relative  w-[60%] h-[370px]  z-0'>
+                    <Image 
+                    src='/assets/Yumu.png'
+                    alt='yumu이미지'
+                    layout='fill'
+                   
+                    />
                   </div>
                   <div className="absolute z-10  right-[70px] w-[50%] flex flex-col items-end text-end">
                     <h2 className="text-[31px] text-[white] font-bold mb-[15px]">YUMU 커머스</h2>
@@ -603,6 +602,7 @@ export default function Page() {
                       href="https://yu-mu.vercel.app/"
                       target="_blank"
                       rel="noopener noreferrer"
+                  
                       >
                         <Image
                           src="/assets/external-link.png"
@@ -636,18 +636,14 @@ export default function Page() {
                         height={25}
                       />
                     </a>
-                    <a
-                    href="https://yu-mu.vercel.app/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                    <button    onClick={()=>toast.warning('현재 미제공 중입니다.',{ position: "top-right" })}>
                     <Image
                       src="/assets/external-link.png"
                       alt="외부링크"
                       width={25}
                       height={25}
                     />
-                  </a>
+                    </button>
                   </div>
                 </div>
                 <div className="absolute  w-[60%] right-[0px]  z-0 ">
@@ -659,7 +655,7 @@ export default function Page() {
                     muted
                     playsInline
                   >
-                    <source src="/assets/chatting.mp4" type="video/mp4" />
+                    <source src="/assets/tripterior.mp4" type="video/mp4" />
                   </video>
                 </div>
               </div>

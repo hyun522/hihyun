@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import {  Roboto_Slab, Nanum_Gothic  } from 'next/font/google';
 import '@/app/global.css';
 import Script from 'next/script';
+import { Toaster } from 'sonner';
 
 
 const RobotoSlab = Roboto_Slab({
@@ -51,7 +52,8 @@ export default function RootLayout({
           // onLoad={() => console.log('[Kakao] script loaded')}
           // onError={(e) => console.log('[Kakao] script error', e)}
         />
-        {children}
+        <main>{children}</main>
+        <Toaster />
       </body>
     </html>
   );
