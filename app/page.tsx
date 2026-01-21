@@ -302,7 +302,7 @@ export default function Page() {
       </section>
       <section
         className="sec2"
-        style={{ height: '100vh', background: '#374151' }}
+        style={{  background: '#374151' }}
       >
         <div className="relative">
           <h1
