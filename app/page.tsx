@@ -90,7 +90,6 @@ export default function Page() {
 
     const ctx = gsap.context(() => {
       // 타이틀 공통 애니메이션
-      // console.log('titles:', gsap.utils.toArray('.reveal-title'));
       gsap.utils.toArray<HTMLElement>('.reveal-title').forEach((el) => {
         gsap.fromTo(
           el,
@@ -98,11 +97,11 @@ export default function Page() {
           {
             y: 0,
             opacity: 1,
-            duration: 0.6,
-            ease: 'back.out(1.6)', // "툭" 튀어나오는 느낌
+            duration: 1,
+            ease: 'back.out(3)', // "툭" 튀어나오는 느낌
             scrollTrigger: {
               trigger: el, // 또는 el.closest("section")
-              start: 'top 80%', // 화면 80% 지점에 닿으면 시작
+              start: 'top 70%', // 화면 80% 지점에 닿으면 시작
               toggleActions: 'play none none reverse', // 내려오면 등장, 올라가면 다시 숨김
               markers: true,
             },
@@ -317,7 +316,7 @@ export default function Page() {
                       after:text-white
                       after:top-[3px]
                       after:left-[3px]
-                      after:bg-[#c84b31]
+                      after:bg-[#7C6CE8]
                       after:p-[15px]
                       after:z-[-2]
                     "
@@ -362,13 +361,6 @@ export default function Page() {
         </div>
         <div className="box-border border border-[5px] border-t-0 border-b-0 border-[black] rounded-[40px] w-[700px] mx-auto my-[20px]">
           <div className="border-[20px] border-[#374151] bg-[#374151] w-[600px]  mx-auto text-[white] text-">
-            {/* <span
-              className="bg-[linear-gradient(128.93deg,rgb(0,173,181)_22.41%,rgb(57,62,70)_93.45%)]
-    bg-clip-text
-    text-transparent
-    font-semibold
-  "
-            > */}
             의료데이터를 다루는 웹서비스를 다루며 비즈니스의 가치를 고객에게
             온전히 전달하기위해 다양한 직무의 구성원들과 <span className="bg-[linear-gradient(128.93deg,rgb(0,173,181)_22.41%,rgb(57,62,70)_93.45%)]">능동적으로 커뮤니케이션
             </span>
@@ -428,22 +420,20 @@ export default function Page() {
       </section>
       <section
         className="sec3 "
-        style={{ height: '100vh', background: '#374151', display:'flex', alignItems:'center'}}
+        style={{ height: '100vh', background: '#262728', display:'flex', justifyContent:'center', alignItems:'center'}}
       >
-        <div className=" flex flex-col  items-center w-full font-[nanum_gothic] ">
-          <div className='w-[1100px] flex flex-col '>
-
-          <div className='reveal-title  p-[40px]  bg-white'>
+        <div className="w-[1500px]  h-[350px] flex  justify-between gap-[10px] font-[nanum_gothic] bg-[#262728] ">
+          <div className='reveal-title  p-[20px] w-[700px]  bg-[#383B40] rounded-2xl hadow-[0_20px_5px_rgba(91,90,90,0.25)]'>
           <h1
             className="
              relative
-                    text-[60px]
+                    text-[50px]
                     font-bold
                   text-[#FF9801]
                     z-10
                     after:content-['Career']
                     after:absolute
-                    after:text-black
+                    after:text-white
                     after:top-[4px]
                     after:left-[3px]
                     after:w-[270px]
@@ -453,10 +443,10 @@ export default function Page() {
             Career.
           </h1>
           <div>
-            <h2 className='font-[nanum_gothic] text-[30px] font-bold'>서울대 병원</h2>
+            <h2 className='font-[nanum_gothic] text-white text-[30px] font-bold'>서울대 병원</h2>
             <p className='mb-[10px] font-bold text-[#aaa]'>2024.11.01 ~ 2025.12.31</p>
             <p className='inline font-bold p-[8px] rounded-[14px] bg-orange-300'>FE 개발</p>
-            <ul className='mt-[10px]'>
+            <ul className='mt-[30px]  text-white list-disc list-inside'>
               <li>
                 Admin 페이지 개발 React 기반 환경 구축 및 개발(typescript,
                 redux)
@@ -469,16 +459,17 @@ export default function Page() {
             </ul>
           </div>
           </div>
-          <div className='reveal-title  p-[40px] mt-[90px] flex flex-col  items-end text-end  bg-amber-100' >
+          <div className='reveal-title w-[700px]  h-[350px]  p-[20px] flex flex-col bg-[#383B40] rounded-2xl  shadow-[0_10px_30px_-15px_rgba(2,12,27,.7)]' >
           <h1
-            className="relative
-                    text-[60px]
+            className="
+                    relative
+                    text-[50px]
                     font-bold
                     text-[#FF9801]
                     z-10
                     after:content-['Experience']
                     after:absolute
-                    after:text-black
+                    after:text-white
                     after:top-[4px]
                     after:left-[3px]
                     after:w-[270px]
@@ -488,23 +479,21 @@ export default function Page() {
             Experience
           </h1>
           <div >
-            <h2 className='font-[nanum_gothic] text-[30px] font-bold'>코드잇 프론트엔드 부트캠프 2기 </h2>
+            <h2 className='font-[nanum_gothic] text-[30px] font-bold text-white'>코드잇 프론트엔드 부트캠프 2기 </h2>
             <p className='mb-[10px] font-bold text-[#aaa]'>2023.10 ~ 2024.04</p>
-            <ul>
+            <ul className='mt-[30px] text-white list-disc list-inside'>
               <li>
                 웹 개 발의 기초부터 립트 적용 등의 교 React와 Next.js를 활용한
-                동적 웹 인터 교육 이수
+                동적 웹 인터페이스 교육 이수
               </li>
             </ul>
           </div>
           </div>
         </div>
-        </div>
       </section>
       <section
         className="sec4"
-        // style={{ height: '100vh', background: '#374151' }}
-        style={{ height: '100vh', background: '#374151' }}
+        style={{  background: '#374151', paddingBottom:'90px' }}
       >
         <h1
           className="reveal-title relative
@@ -519,7 +508,7 @@ export default function Page() {
                       after:text-white
                       after:top-[3px]
                       after:left-[3px]
-                      after:bg-[#60A5FA]
+                      after:bg-[#7C6CE8]
                       after:p-[15px]
                       after:w-[270px]
                       after:z-[-2]
@@ -527,168 +516,162 @@ export default function Page() {
         >
           Project
         </h1>
-        <div className="box-border w-full px-[40px] ">
-          <div className="relative  mx-auto w-[800px] h-[300px] flex justify-between  ">
-            <div className="relative z-10   w-[50%] text-left z-0 ">
-              <h2 className="text-[21px] text-[white]">Chatting</h2>
-              <p className="text-[#8892b0]">2024/08/01 - 2024/08/09 </p>
-              <p className="text-[#8892b0]">1명</p>
-              <div className="p-[25px] bg-[#3d4654] rounded-[8px] text-[#a8b2da] text-[18px] shadow-[0_10px_30px_-15px_rgba(2,12,27,.7)]">
-                PostgreSQL 기반, 인증 데이터베이스 파일 스토리지를 api로
-                제공하는 Supabase를 활용하여 로그인 및 회원가입 / 프로필이미지
-                추가 / 실시간 채팅 기능을 구현했습니다.
-              </div>
-              <p className="text-[#A8B2D1]">react, tailwind, typescrip</p>
-              <div>
-                <a
-                  href="https://github.com/hyun522/chatting"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+        <div className="font-[nanum_gothic] flex justify-center mt-[100px] ">
+          <div className='w-[1100px]  flex flex-col gap-[200px]' >
+            <div className="reveal-title relative  mx-auto w-full h-[400px] flex justify-between  ">
+              <div className="relative left-[70px] z-10   w-[50%] text-left z-0">
+                <h2 className="text-[31px] text-[white] font-bold mb-[15px]">Chatting</h2>
+                <p className="text-[#8892b0] font-bold">2024/08/01 - 2024/08/09 </p>
+                <p className="text-[#8892b0] font-bold  mb-[15px]">1명</p>
+                <div className="w-[400px] p-[25px] bg-[#3d4654] rounded-[8px] text-[#a8b2da] text-[18px] shadow-[0_10px_30px_-15px_rgba(2,12,27,.7)]  mb-[15px] ">
+                  PostgreSQL 기반, 인증 데이터베이스 파일 스토리지를 api로
+                  제공하는 Supabase를 활용하여 로그인 및 회원가입 / 프로필이미지
+                  추가 / 실시간 채팅 기능을 구현했습니다.
+                </div>
+                <p className="text-[#A8B2D1] font-bold mb-[15px]">react, tailwind, typescrip</p>
+                <div className='flex gap-[10px] '>
+                  <a
+                    href="https://github.com/hyun522/chatting"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      src="/assets/github-log.svg"
+                      alt="깃 이미지"
+                      width={25}
+                      height={25}
+                    />
+                  </a>
                   <Image
-                    src="/assets/github-log.svg"
-                    alt="깃 이미지"
-                    width={20}
-                    height={20}
+                    src="/assets/external-link.png"
+                    alt="외부링크"
+                    width={25}
+                    height={25}
                   />
-                </a>
-                <Image
-                  src="/assets/external-link.png"
-                  alt="외부링크"
-                  width={20}
-                  height={20}
-                />
+                </div>
               </div>
-            </div>
-            <div className="absolute  w-[50%] right-[20px] h-full  z-0 ">
-              <video
-                className="w-full h-full"
-                preload="auto"
-                loop
-                autoPlay
-                muted
-                playsInline
-              >
-                <source src="/assets/chatting.mp4" type="video/mp4" />
-              </video>
-            </div>
-          </div>
-        </div>
-        
-<div className="box-border w-full px-[40px] ">
-          <div className="relative  mx-auto w-[800px] h-[300px] flex justify-between  bg-[red] ">
-            {/* <div className="absolute  w-[50%] h-full  z-0 bg-[yellow] "> */}
-            <div>
-              <video
-                className="w-full h-full"
-                preload="auto"
-                loop
-                autoPlay
-                muted
-                playsInline
-              >
-                <source src="/assets/chatting.mp4" type="video/mp4" />
-              </video>
-            </div>
-            <div className="relative z-10   w-[50%] text-left   bg-[blue]">
-              <h2 className="text-[21px] text-[white]">YUMU 커머스</h2>
-              <p className="text-[#8892b0]">2024/02/29 - 2024/4/7 </p>
-              <p className="text-[#8892b0]">백엔드2 프론트2 디자인1</p>
-              <div className="p-[25px] bg-[#3d4654] rounded-[8px] text-[#a8b2da] text-[18px] shadow-[0_10px_30px_-15px_rgba(2,12,27,.7)]">
-              판매하고자하는 미술작품을 등록하고 판매를 진행할수 있습니다 또
-              원하는 작품을 검색하거나 찜할수있는 커머스 사이트입니다.
-              </div>
-              <p className="text-[#A8B2D1]"> typascript, next.js, shadcn-ui, reactHookForm, react-query, axios,
-              tailwind css</p>
-              <div>
-                <a
-                href="https://github.com/Team-YUMU/YUMU-FE?tab=readme-ov-file"
-                  target="_blank"
-                  rel="noopener noreferrer"
+              <div className="absolute w-[60%] he right-[0px] z-0 h-full ">
+                <video
+                  className="w-full h-full"
+                  preload="auto"
+                  loop
+                  autoPlay
+                  muted
+                  playsInline
                 >
-                  <Image
-                    src="/assets/github-log.svg"
-                    alt="깃 이미지"
-                    width={20}
-                    height={20}
-                  />
-                </a>
-                <a
-                href="https://yu-mu.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src="/assets/external-link.png"
-                  alt="외부링크"
-                  width={20}
-                  height={20}
-                />
-              </a>
+                  <source src="/assets/chatting.mp4" type="video/mp4" />
+                </video>
               </div>
             </div>
-          </div>
-        </div>
-<div className="box-border w-full px-[40px] ">
-          <div className="relative  mx-auto w-[800px] h-[300px] flex justify-between  ">
-            <div className="relative z-10   w-[50%] text-left z-0 ">
-              <h2 className="text-[21px] text-[white]">tripterior 가족여행기록 사이트</h2>
-              <p className="text-[#8892b0]">2024/09/09 - 2024/10/19</p>
-              <p className="text-[#8892b0]">백엔드2 프론트2(팀장담당) 디자인1 기획자1</p>
-              <div className="p-[25px] bg-[#3d4654] rounded-[8px] text-[#a8b2da] text-[18px] shadow-[0_10px_30px_-15px_rgba(2,12,27,.7)]">
-              가족 프로필을 생성, 가족 여행 기록을 남기기 댓글을 통해 소통할 수 있습니다. 또한, 기념일을 설정하고 이를 저장하여 알림을 받을 수 있는 사이트.
-              </div>
-              <p className="text-[#A8B2D1]">Next.js, typascript, reducx, react-query,  scss</p>
-              <div>
-                <a
-                href="https://github.com/SWYP-6-6/tripterrior"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Image
-                    src="/assets/github-log.svg"
-                    alt="깃 이미지"
-                    width={20}
-                    height={20}
-                  />
-                </a>
-                <a
-                href="https://yu-mu.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src="/assets/external-link.png"
-                  alt="외부링크"
-                  width={20}
-                  height={20}
-                />
-              </a>
-              미제공
-              </div>
+                <div className='reveal-title relative  w-full h-[400px]  flex justify-between items-center '>
+                  <div  className='relative  w-[60%]  z-0'>
+                    <video
+                      className="w-full h-full"
+                      preload="auto"
+                      loop
+                      autoPlay
+                      muted
+                      playsInline
+                    >
+                      <source src="/assets/chatting.mp4" type="video/mp4" />
+                    </video>
+                  </div>
+                  <div className="absolute z-10  right-[70px] w-[50%] flex flex-col items-end text-end">
+                    <h2 className="text-[31px] text-[white] font-bold mb-[15px]">YUMU 커머스</h2>
+                    <p className="text-[#8892b0] font-bold">2024/02/29 - 2024/4/7 </p>
+                    <p className="text-[#8892b0] font-bold mb-[15px]">백엔드2 프론트2 디자인1</p>
+                    <div className="p-[25px] bg-[#3d4654] rounded-[8px] text-[#a8b2da] text-[18px] shadow-[0_10px_30px_-15px_rgba(2,12,27,.7)] w-[400px] mb-[15px]">
+                      판매하고자하는 미술작품을 등록하고 판매를 진행할수 있습니다 또
+                      원하는 작품을 검색하거나 찜할수있는 커머스 사이트입니다.
+                    </div>
+                    <p className="text-[#A8B2D1] font-bold mb-[15px]"> typascript, next.js, shadcn-ui, reactHookForm,<br /> react-query, axios,
+                    tailwind css</p>
+                    <div className='flex gap-[10px]'>
+                      <a
+                      href="https://github.com/Team-YUMU/YUMU-FE?tab=readme-ov-file"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Image
+                          src="/assets/github-log.svg"
+                          alt="깃 이미지"
+                          width={25}
+                          height={25}
+                        />
+                      </a>
+                      <a
+                      href="https://yu-mu.vercel.app/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >
+                        <Image
+                          src="/assets/external-link.png"
+                          alt="외부링크"
+                          width={25}
+                          height={25}
+                        />
+                      </a>
+                  </div>
+                </div>
             </div>
-            <div className="absolute  w-[50%] right-[20px] h-full  z-0 ">
-              <video
-                className="w-full h-full"
-                preload="auto"
-                loop
-                autoPlay
-                muted
-                playsInline
-              >
-                <source src="/assets/chatting.mp4" type="video/mp4" />
-              </video>
-            </div>
+            <div className="reveal-title box-border w-full   h-[400px]  relative flex justify-between ">
+                <div className="relative z-10  left-[70px] w-[50%] text-left  ">
+                  <h2 className="text-[31px] text-[white] font-bold mb-[15px]" >tripterior 가족여행기록 사이트</h2>
+                  <p className="text-[#8892b0]  font-bold">2024/09/09 - 2024/10/19</p>
+                  <p className="text-[#8892b0]  font-bold  mb-[15px]">백엔드2 프론트2(팀장담당) 디자인1 기획자1</p>
+                  <div className="p-[25px] bg-[#3d4654] rounded-[8px] text-[#a8b2da] text-[18px] shadow-[0_10px_30px_-15px_rgba(2,12,27,.7)]   w-[400px]  mb-[15px] ">
+                  가족 프로필을 생성, 가족 여행 기록을 남기기 댓글을 통해 소통할 수 있습니다. 또한, 기념일을 설정하고 이를 저장하여 알림을 받을 수 있는 사이트.
+                  </div>
+                  <p className="text-[#A8B2D1] font-bold mb-[15px]">Next.js, typascript, reducx, react-query,  scss</p>
+                  <div  className='flex gap-[10px]'>
+                    <a
+                    href="https://github.com/SWYP-6-6/tripterrior"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Image
+                        src="/assets/github-log.svg"
+                        alt="깃 이미지"
+                        width={25}
+                        height={25}
+                      />
+                    </a>
+                    <a
+                    href="https://yu-mu.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      src="/assets/external-link.png"
+                      alt="외부링크"
+                      width={25}
+                      height={25}
+                    />
+                  </a>
+                  </div>
+                </div>
+                <div className="absolute  w-[60%] right-[0px]  z-0 ">
+                  <video
+                    className="w-full h-full"
+                    preload="auto"
+                    loop
+                    autoPlay
+                    muted
+                    playsInline
+                  >
+                    <source src="/assets/chatting.mp4" type="video/mp4" />
+                  </video>
+                </div>
+              </div>
           </div>
         </div>
       </section>
-      {/* 시멘틱 태그 여기도 section 넣는게 맞아? */}
       <section>
         <button
-          className={`w-[50px] h-[50px] bg-[pink] rounded-[50%] text-[whiite] justify-center items-center fixed bottom-[20px] right-[20px] ${showScrollBtn ? 'flex' : 'hidden'}`}
+          className={`w-[50px] h-[50px] bg-[white] rounded-[50%] text-[whiite] justify-center items-center fixed bottom-[20px] right-[20px] shadow-[0_35px_35px_rgba(0,0,0,0.25)]  ${showScrollBtn ? 'flex' : 'hidden'}`}
           onClick={() => handleScrollToTop()}
         >
-          <FaArrowUp color="white" />
+          <FaArrowUp color="black" />
         </button>
       </section>
       {isOpen && (
