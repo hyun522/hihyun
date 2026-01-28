@@ -1,10 +1,8 @@
 import type { Metadata } from 'next';
-import {  Roboto_Slab, Nanum_Gothic  } from 'next/font/google';
+import { Roboto_Slab, Nanum_Gothic } from 'next/font/google';
 import '@/app/global.css';
 import Script from 'next/script';
 import { Toaster } from 'sonner';
-// import { useState } from 'react';
-
 
 const RobotoSlab = Roboto_Slab({
   subsets: ['latin'],
@@ -14,11 +12,9 @@ const RobotoSlab = Roboto_Slab({
 
 const NanumGothic = Nanum_Gothic({
   subsets: ['latin'],
-  weight: [ '400', '700', '800'],
+  weight: ['400', '700', '800'],
   display: 'swap',
 });
-
-// const [isKakaoLoaded, setIsKakaoLoaded] = useState(false);
 
 // Roboto Slab
 export const metadata: Metadata = {
@@ -35,7 +31,6 @@ export const metadata: Metadata = {
   ],
 };
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -48,8 +43,8 @@ export default function RootLayout({
       <body
         // className={`antialiased`}
         className={`${RobotoSlab.className} ${NanumGothic.className} antialiased`}
-      > 
-         <Script
+      >
+        <Script
           src={`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${key}&libraries=services,clusterer&autoload=false`}
           strategy="beforeInteractive"
           // onLoad={() => {
@@ -58,11 +53,10 @@ export default function RootLayout({
           //   });
           // }}
         />
-        
+
         <main>{children}</main>
         <Toaster />
       </body>
     </html>
   );
 }
-
