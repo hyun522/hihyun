@@ -9,5 +9,10 @@ export default {
         roboto_slab: ['var(--font-roboto-slab)', 'serif'],
       },
     },
+    screens: {
+      mobile: { min: '360px', max: '539px' },
+      tablet: { min: '540px', max: '1024px' },
+      desktop: { min: '1025px' },
+    },
   },
 } satisfies Config;
