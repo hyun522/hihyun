@@ -114,6 +114,7 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
 }
+
 @keyframes wiggleLR {
   0% {
     transform: rotate(0deg);

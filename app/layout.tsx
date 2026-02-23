@@ -4,6 +4,7 @@ import '@/app/global.css';
 import Script from 'next/script';
 import { Toaster } from 'sonner';
 import WebVitals from './_components/WebVitals';
+import { Analytics } from '@vercel/analytics/next';
 
 const RobotoSlab = Roboto_Slab({
   subsets: ['latin'],
@@ -55,6 +56,7 @@ export default function RootLayout({
           // }}
         />
         <WebVitals />
+        <Analytics />
         <main>{children}</main>
         <Toaster />
       </body>
