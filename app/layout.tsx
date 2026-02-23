@@ -3,6 +3,7 @@ import { Roboto_Slab, Nanum_Gothic } from 'next/font/google';
 import '@/app/global.css';
 import Script from 'next/script';
 import { Toaster } from 'sonner';
+import WebVitals from './_components/WebVitals';
 
 const RobotoSlab = Roboto_Slab({
   subsets: ['latin'],
@@ -53,7 +54,7 @@ export default function RootLayout({
           //   });
           // }}
         />
-
+        <WebVitals />
         <main>{children}</main>
         <Toaster />
       </body>
