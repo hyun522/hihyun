@@ -29,6 +29,7 @@ export default function Page() {
   const sec2Ref = useRef<HTMLElement | null>(null);
   const [init, setInit] = useState(false);
   const [showScrollBtn, setShowScrollBtn] = useState<boolean>(false);
+  const [scrollBtnMounted, setScrollBtnMounted] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isMapOpen, setIsMapOpen] = useState<boolean>(false);
 
@@ -61,16 +62,20 @@ export default function Page() {
     return () => ctx.revert();
   }, [init]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     //스크롤이 발생할때 마다 이게 작동한다고? 의존성이 없는데?
     //scroll 이벤트가 발생되면  handleScroll 함수를 실행시키겠다.
     const handleScroll = () => {
       if (window.scrollY > 200) {
-        setShowScrollBtn(true);
+        setShowScrollBtn(true); //up 버튼
       } else {
-        setShowScrollBtn(false);
+        setShowScrollBtn(false); //down 버튼
       }
     };
+
+    // 새로고침 직후 현재 스크롤 위치를 즉시 반영한 뒤 버튼을 표시
+    handleScroll();
+    setScrollBtnMounted(true);
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -116,20 +121,22 @@ export default function Page() {
       />
       <CareerExperienceSection />
       <ProjectsSection />
-      <section>
-        <button
-          aria-label="scroll-to-top"
-          className={`rounded-[50%] justify-center items-center fixed   
+      {scrollBtnMounted && (
+        <section>
+          <button
+            aria-label="scroll-to-top"
+            className={`rounded-[50%] justify-center items-center fixed   
              ${showScrollBtn ? 'w-[50px] h-[50px] bg-[white]  bottom-[20px] right-[20px] flex  shadow-[0_35px_35px_rgba(0,0,0,0.25)] ' : 'bottom-[40px] right-[50%] bg-[none] right-[50%] pointer-events-none animate-[scrollHint_1.2s_ease-in-out_infinite]'}`}
-          onClick={handleScrollToTop}
-        >
-          {showScrollBtn ? (
-            <FaArrowUp color="black" />
-          ) : (
-            <FaArrowDown size="2em" />
-          )}
-        </button>
-      </section>
+            onClick={handleScrollToTop}
+          >
+            {showScrollBtn ? (
+              <FaArrowUp color="black" />
+            ) : (
+              <FaArrowDown size="2em" />
+            )}
+          </button>
+        </section>
+      )}
       {isOpen && (
         <div
           className="fixed left-0 top-0 z-20 flex h-screen w-screen items-center justify-center bg-[rgba(17,17,17,0.482)]"
