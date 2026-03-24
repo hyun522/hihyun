@@ -5,19 +5,21 @@ export default function CareerExperienceSection() {
     <section
       className="sec3"
       style={{
-        height: '100vh',
+        minHeight: '100vh',
         background: '#262728',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        paddingTop: '50px',
+        paddingBottom: '50px',
       }}
     >
-      <div className="w-[1500px] h-[350px] flex justify-between gap-[10px] font-[nanum_gothic] bg-[#262728]">
-        <div className="reveal-title p-[20px] w-[700px] bg-[#383B40] rounded-2xl hadow-[0_20px_5px_rgba(91,90,90,0.25)]">
+      <div className="w-[90%] max-w-[1500px] h-[350px] flex justify-between gap-[10px] font-[nanum_gothic] bg-[#262728] tablet:flex-col tablet:h-auto tablet:gap-[30px] mobile:flex-col mobile:h-auto mobile:gap-[30px]">
+        <div className="reveal-title p-[20px] w-[700px] tablet:w-full mobile:w-full bg-[#383B40] rounded-2xl hadow-[0_20px_5px_rgba(91,90,90,0.25)]">
           <h1
             className="
              relative
-                    text-[50px]
+                    text-[50px] tablet:text-[38px] mobile:text-[28px]
                     font-bold
                   text-[#FF9801]
                     z-10
@@ -33,7 +35,7 @@ export default function CareerExperienceSection() {
             Career.
           </h1>
           <div>
-            <h2 className="font-[nanum_gothic] text-white text-[30px] font-bold">
+            <h2 className="font-[nanum_gothic] text-white text-[30px] tablet:text-[22px] mobile:text-[18px] font-bold">
               서울대 병원
             </h2>
             <p className="mb-[10px] font-bold text-[#aaa]">
@@ -55,11 +57,11 @@ export default function CareerExperienceSection() {
             </ul>
           </div>
         </div>
-        <div className="reveal-title w-[700px] h-[350px] p-[20px] flex flex-col bg-[#383B40] rounded-2xl shadow-[0_10px_30px_-15px_rgba(2,12,27,.7)]">
+        <div className="reveal-title w-[700px] tablet:w-full h-[350px] tablet:h-auto mobile:w-full mobile:h-auto p-[20px] flex flex-col bg-[#383B40] rounded-2xl shadow-[0_10px_30px_-15px_rgba(2,12,27,.7)]">
           <h1
             className="
                     relative
-                    text-[50px]
+                    text-[50px] tablet:text-[38px] mobile:text-[28px]
                     font-bold
                     text-[#FF9801]
                     z-10
@@ -75,7 +77,7 @@ export default function CareerExperienceSection() {
             Experience
           </h1>
           <div>
-            <h2 className="font-[nanum_gothic] text-[30px] font-bold text-white">
+            <h2 className="font-[nanum_gothic] text-[30px] tablet:text-[22px] mobile:text-[18px] font-bold text-white">
               코드잇 프론트엔드 부트캠프 2기{' '}
             </h2>
             <p className="mb-[10px] font-bold text-[#aaa]">2023.10 ~ 2024.04</p>

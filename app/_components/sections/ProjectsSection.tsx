@@ -11,7 +11,7 @@ export default function ProjectsSection() {
     >
       <h1
         className="reveal-title relative
-                      text-[70px]
+                      text-[70px] tablet:text-[50px] mobile:text-[36px]
                       font-bold
                       text-black
                       z-10
@@ -31,21 +31,21 @@ export default function ProjectsSection() {
         Project
       </h1>
       <div className="font-[nanum_gothic] flex justify-center mt-[100px]">
-        <div className="w-[1100px] flex flex-col gap-[200px]">
-          <div className="reveal-title relative mx-auto w-full h-[830px] flex items-center">
-            <div className="relative left-[70px] z-10 w-[50%] text-left">
-              <h2 className="text-[31px] text-[white] font-bold mb-[15px]">
+        <div className="w-[90%] max-w-[1100px] flex flex-col gap-[200px] tablet:gap-[80px] mobile:gap-[60px]">
+          <div className="reveal-title relative mx-auto w-full h-[830px] flex items-center tablet:flex-col tablet:h-auto tablet:pb-[30px] mobile:flex-col mobile:h-auto mobile:pb-[20px]">
+            <div className="relative left-[70px] z-10 w-[50%] text-left tablet:w-full tablet:left-0 tablet:z-auto mobile:w-full mobile:left-0 mobile:z-auto">
+              <h2 className="text-[31px] tablet:text-[26px] mobile:text-[20px] text-[white] font-bold mb-[15px]">
                 YUMU 커머스
               </h2>
               <p className="text-[#8892b0] font-bold">2024/02/29 - 2024/4/7</p>
               <p className="text-[#8892b0] font-bold mb-[15px]">
                 백엔드2 프론트2 디자인1
               </p>
-              <div className="w-[400px] p-[25px] bg-[#3d4654] rounded-[8px] text-[#a8b2da] text-[18px] shadow-[0_10px_30px_-15px_rgba(2,12,27,.7)] mb-[15px]">
+              <div className="w-[400px] tablet:w-full mobile:w-full p-[25px] bg-[#3d4654] rounded-[8px] text-[#a8b2da] text-[18px] shadow-[0_10px_30px_-15px_rgba(2,12,27,.7)] mb-[15px]">
                 판매하고자하는 미술작품을 등록하고 판매를 진행할수 있습니다 또
                 원하는 작품을 검색하거나 찜할수있는 커머스 사이트입니다.
               </div>
-              <div className="w-[400px] p-[25px] bg-[#3d4654] rounded-[8px] text-[#a8b2da] text-[18px] shadow-[0_10px_30px_-15px_rgba(2,12,27,.7)] mb-[15px]">
+              <div className="w-[400px] tablet:w-full mobile:w-full p-[25px] bg-[#3d4654] rounded-[8px] text-[#a8b2da] text-[18px] shadow-[0_10px_30px_-15px_rgba(2,12,27,.7)] mb-[15px]">
                 <p className="font-bold text-[18px]">
                   문제 해결 및 사용자 경험 개선
                 </p>
@@ -100,7 +100,7 @@ export default function ProjectsSection() {
                 </a>
               </div>
             </div>
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[70%] h-[300px] z-0">
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[70%] h-[300px] z-0 tablet:relative tablet:right-auto tablet:top-auto tablet:translate-y-0 tablet:w-full tablet:h-[250px] mobile:relative mobile:right-auto mobile:top-auto mobile:translate-y-0 mobile:w-full mobile:h-[200px]">
               <Image
                 src="/assets/Yumu.png"
                 alt="yumu이미지"
@@ -110,8 +110,8 @@ export default function ProjectsSection() {
             </div>
           </div>
 
-          <div className="reveal-title relative w-full h-[400px] flex justify-between items-center">
-            <div className="relative w-[60%] h-[370px] z-0">
+          <div className="reveal-title relative w-full h-[400px] flex justify-between items-center tablet:flex-col tablet:h-auto mobile:flex-col mobile:h-auto">
+            <div className="relative w-[60%] h-[370px] z-0 tablet:w-full tablet:h-[250px] mobile:w-full mobile:h-[200px]">
               <video
                 className="w-full h-full"
                 preload="auto"
@@ -123,15 +123,15 @@ export default function ProjectsSection() {
                 <source src="/assets/chatting.mp4" type="video/mp4" />
               </video>
             </div>
-            <div className="absolute z-10 right-[70px] w-[50%] flex flex-col items-end text-end">
-              <h2 className="text-[31px] text-[white] font-bold mb-[15px]">
+            <div className="absolute z-10 right-[70px] w-[50%] flex flex-col items-end text-end tablet:relative tablet:right-auto tablet:w-full tablet:items-start tablet:text-left mobile:relative mobile:right-auto mobile:w-full mobile:items-start mobile:text-left">
+              <h2 className="text-[31px] tablet:text-[26px] mobile:text-[20px] text-[white] font-bold mb-[15px]">
                 Chatting
               </h2>
               <p className="text-[#8892b0] font-bold">
                 2024/08/01 - 2024/08/09
               </p>
               <p className="text-[#8892b0] font-bold mb-[15px]">1명</p>
-              <div className="p-[25px] bg-[#3d4654] rounded-[8px] text-[#a8b2da] text-[18px] shadow-[0_10px_30px_-15px_rgba(2,12,27,.7)] w-[400px] mb-[15px]">
+              <div className="p-[25px] bg-[#3d4654] rounded-[8px] text-[#a8b2da] text-[18px] shadow-[0_10px_30px_-15px_rgba(2,12,27,.7)] w-[400px] tablet:w-full mobile:w-full mb-[15px]">
                 PostgreSQL 기반, 인증 데이터베이스 파일 스토리지를 api로
                 제공하는 Supabase를 활용하여 로그인 및 회원가입 / 프로필이미지
                 추가 / 실시간 채팅 기능을 구현했습니다.
@@ -170,9 +170,9 @@ export default function ProjectsSection() {
             </div>
           </div>
 
-          <div className="reveal-title box-border w-full h-[400px] relative flex justify-between">
-            <div className="relative z-10 left-[70px] w-[50%] text-left">
-              <h2 className="text-[31px] text-[white] font-bold mb-[15px]">
+          <div className="reveal-title box-border w-full h-[400px] relative flex justify-between tablet:flex-col tablet:h-auto mobile:flex-col mobile:h-auto">
+            <div className="relative z-10 left-[70px] w-[50%] text-left tablet:w-full tablet:left-0 tablet:z-auto mobile:w-full mobile:left-0 mobile:z-auto">
+              <h2 className="text-[31px] tablet:text-[26px] mobile:text-[20px] text-[white] font-bold mb-[15px]">
                 tripterior 가족여행기록 사이트
               </h2>
               <p className="text-[#8892b0] font-bold">
@@ -181,7 +181,7 @@ export default function ProjectsSection() {
               <p className="text-[#8892b0] font-bold mb-[15px]">
                 백엔드2 프론트2(팀장담당) 디자인1 기획자1
               </p>
-              <div className="p-[25px] bg-[#3d4654] rounded-[8px] text-[#a8b2da] text-[18px] shadow-[0_10px_30px_-15px_rgba(2,12,27,.7)] w-[400px] mb-[15px]">
+              <div className="p-[25px] bg-[#3d4654] rounded-[8px] text-[#a8b2da] text-[18px] shadow-[0_10px_30px_-15px_rgba(2,12,27,.7)] w-[400px] tablet:w-full mobile:w-full mb-[15px]">
                 가족 프로필을 생성, 가족 여행 기록을 남기기 댓글을 통해 소통할
                 수 있습니다. 또한, 기념일을 설정하고 이를 저장하여 알림을 받을
                 수 있는 사이트.
@@ -218,7 +218,7 @@ export default function ProjectsSection() {
                 </button>
               </div>
             </div>
-            <div className="absolute w-[60%] right-[0px] z-0">
+            <div className="absolute w-[60%] right-[0px] z-0 tablet:relative tablet:w-full tablet:right-auto tablet:h-[250px] mobile:relative mobile:w-full mobile:right-auto mobile:h-[200px]">
               <video
                 className="w-full h-full"
                 preload="auto"

@@ -71,11 +71,15 @@ export default function IntroduceSection({
   onOpenMap,
 }: IntroduceSectionProps) {
   return (
-    <section className="sec2" ref={sectionRef} style={{ background: '#374151' }}>
+    <section
+      className="sec2"
+      ref={sectionRef}
+      style={{ background: '#374151' }}
+    >
       <div>
         <h1
           className="reveal-title relative
-                      text-[70px]
+                      text-[70px] tablet:text-[50px] mobile:text-[36px]
                       font-bold
                       text-black
                       z-10
@@ -94,39 +98,44 @@ export default function IntroduceSection({
           Introduce
         </h1>
       </div>
-      <div className="flex justify-center items-center text-white w-[500px] mx-auto mt-[50px] p-[20px] gap-[50px] font-[nanum_gothic] font-semibold">
+      <div className="flex justify-center items-center text-white w-[500px] mx-auto mt-[50px] p-[20px] gap-[50px] tablet:gap-[20px] mobile:flex-col mobile:items-center mobile:gap-[15px] font-[nanum_gothic] font-semibold">
         <div>
           <Image
             src="/assets/profile.png"
             alt="증명사진 이미지"
             width={120}
             height={120}
+            className="mobile:w-[100px]"
           />
         </div>
-        <div className="flex flex-col w-full">
-          <p className="text-[40px] mb-[10px]">정현진</p>
-          <p>생년월일 : 1996.11.15</p>
-          <div className="flex gap-[20px] h-[30px] items-end w-full">
-            주소 : 서울시 구로구 고척로
-            <div className="relative w-[60px]" onClick={onOpenMap}>
-              <span className="absolute bottom-[0px] z-10 left-[-10px] cursor-pointer animate-[wiggleLR_1.2s_ease-in-out_infinite]">
-                <Image
-                  src="/assets/location.png"
-                  alt="위치 아이콘"
-                  width={30}
-                  height={30}
+        <div className="flex flex-col w-full mobile:items-center mobile:text-center">
+          <p className="text-[40px] tablet:text-[28px]  mobile:text-[22px] mb-[10px] mobile:text-center">
+            정현진
+          </p>
+          <div className="mobile:flex mobile:flex-col mobile:items-center mobile:gap-[10px] ">
+            <p>생년월일 : 1996.11.15</p>
+            <div className="flex gap-[20px] h-[30px] items-end w-full mobile:w-auto mobile:h-auto mobile:flex-col mobile:items-center mobile:justify-center mobile:text-center">
+              주소 : 서울시 구로구 고척로
+              <div className="relative w-[60px]" onClick={onOpenMap}>
+                <span className="absolute bottom-[0px] z-10 left-[-10px] cursor-pointer animate-[wiggleLR_1.2s_ease-in-out_infinite]">
+                  <Image
+                    src="/assets/location.png"
+                    alt="위치 아이콘"
+                    width={30}
+                    height={30}
+                  />
+                </span>
+                <Map
+                  center={{ lat: 37.501581, lng: 126.846524 }}
+                  style={{ width: '100%', height: '60px', borderRadius: '50%' }}
                 />
-              </span>
-              <Map
-                center={{ lat: 37.501581, lng: 126.846524 }}
-                style={{ width: '100%', height: '60px', borderRadius: '50%' }}
-              />
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="box-border border border-[5px] border-t-0 border-b-0 border-[black] rounded-[40px] w-[900px] mx-auto my-[20px]">
-        <div className="border-[20px] border-[#374151] bg-[#374151] w-[800px] mx-auto text-[white] text-">
+      <div className="box-border border border-[5px] border-t-0 border-b-0 border-[black] rounded-[40px] w-[900px] tablet:w-[90%] mobile:w-[90%] mx-auto my-[20px]">
+        <div className="border-[20px] border-[#374151] bg-[#374151] w-[800px] tablet:w-full mobile:w-full mx-auto text-[white] text-">
           <p className="text-[20px] text-center font-bold">
             “사용자가 망설이지 않고 사용할 수 있는 화면을 만드는 프론트엔드
             개발자입니다.” <br />
@@ -148,8 +157,8 @@ export default function IntroduceSection({
           합니다.
           <br />
           <br />
-          기록을 중요하게 생각합니다. 문제 발생 시 원인을 추적하고, 개선
-          사항을 다음 개발에 반영하려 노력합니다.
+          기록을 중요하게 생각합니다. 문제 발생 시 원인을 추적하고, 개선 사항을
+          다음 개발에 반영하려 노력합니다.
           <br />
           <br />
           프론트엔드뿐 아니라{' '}
@@ -161,7 +170,7 @@ export default function IntroduceSection({
           <br />
         </div>
       </div>
-      <div className="relative h-[180px]">
+      <div className="relative h-[180px] ">
         <div className="absolute w-[300px] h-[300px] bottom-[40px] right-[9%] flex items-center animate-[spin_20s_linear_infinite_reverse]">
           {ROTATION_ITEMS.map((item, index) => {
             const angle = (360 / ROTATION_ITEMS.length) * index;

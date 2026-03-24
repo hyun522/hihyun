@@ -94,15 +94,15 @@ export default function HelloSection({
           alignItems: 'center',
         }}
       >
-        <div className="box box-border w-[650px] bg-[#fff] p-[20px] m-auto rounded-[10px] flex flex-col justify-center items-center gap-[30px] font-medium shadow-[0_35px_35px_rgba(0,0,0,0.25)] opacity-[95%]">
-          <p className="font-[roboto_slab] text-[60px] text-center">
+        <div className="box box-border w-[650px] max-w-[90%] bg-[#fff] p-[20px] m-auto rounded-[10px] flex flex-col justify-center items-center gap-[30px] font-medium shadow-[0_35px_35px_rgba(0,0,0,0.25)] opacity-[95%] tablet:w-full tablet:max-w-[calc(100%-2rem)]  mobile:w-full mobile:max-w-[calc(100%-2rem)]">
+          <p className="font-[roboto_slab] text-[60px] text-center tablet:text-[48px] mobile:text-[36px]">
             Hello I'm hyunjin <br />
             front develop
           </p>
-          <div className="flex gap-[20px] font-[roboto_slab] font-medium">
+          <div className="flex gap-[20px] font-[roboto_slab] font-medium   tablet:bg-[pink]  tablet:flex-wrap tablet:justify-center mobile:flex-col mobile:w-full mobile:items-stretch">
             <button
               onClick={onOpenTroubleshooting}
-              className="border border-[#ddd] rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd] transition-all duration-300"
+              className="border border-[#ddd] rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd] transition-all duration-300 mobile:justify-center"
             >
               Troubleshooting
             </button>
@@ -110,7 +110,7 @@ export default function HelloSection({
               href="https://github.com/hyun522"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-[5px] border border-[#ddd] rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd] transition-all duration-300"
+              className="flex items-center gap-[5px] border border-[#ddd] rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd] transition-all duration-300 mobile:justify-center"
             >
               <Image
                 src="/assets/github-log.svg"
@@ -124,7 +124,7 @@ export default function HelloSection({
               href="https://velog.io/@jhj1004v/posts"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-[5px] border border-[#ddd] rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd] transition-all duration-300"
+              className="flex items-center gap-[5px] border border-[#ddd] rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd] transition-all duration-300 mobile:justify-center"
             >
               <Image
                 src="/assets/velog-log.png"
@@ -138,7 +138,7 @@ export default function HelloSection({
               href="#mailgo"
               data-address="jhj1004v"
               data-domain="naver.com"
-              className="flex items-center gap-[5px] border border-[#ddd] rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd] transition-all duration-300"
+              className="flex items-center gap-[5px] border border-[#ddd] rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd] transition-all duration-300 mobile:justify-center"
             >
               <Image
                 src="/assets/email.png"
