@@ -99,7 +99,7 @@ export default function HelloSection({
             Hello I'm hyunjin <br />
             front develop
           </p>
-          <div className="flex gap-[20px] font-[roboto_slab] font-medium   tablet:bg-[pink]  tablet:flex-wrap tablet:justify-center mobile:flex-col mobile:w-full mobile:items-stretch">
+          <div className="flex gap-[20px] font-[roboto_slab] font-medium tablet:flex-wrap tablet:justify-center mobile:flex-col mobile:w-full mobile:items-stretch">
             <button
               onClick={onOpenTroubleshooting}
               className="border border-[#ddd] rounded-[6px] px-[15px] py-[8px] shadow-[0_5px_5px_rgba(91,90,90,0.25)] hover:bg-[#ddd] transition-all duration-300 mobile:justify-center"
