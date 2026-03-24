@@ -4,6 +4,9 @@
 @import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
+@custom-variant mobile (@media (width >= 360px) and (width <= 539px));
+@custom-variant tablet (@media (width >= 540px) and (width <= 1024px));
+@custom-variant desktop (@media (width >= 1025px));
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
